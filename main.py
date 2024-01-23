@@ -62,23 +62,29 @@ def stemming(tokens):
         "macro"
     ]
 
-
+    dump = []
     for tok in tokens:
-
+        print(tok)
         suf_flag = False
         pre_flag = False
 
         for i in suffix_list:
-            if tok.endswith(i) & suf_flag == False:
-                tok = tok[:-len(i)]
-                suf_flag = True
+            if tok[len(i):] == i:
+                if suf_flag == False:
+                    tok = tok[:-len(i)]
+                    suf_flag = True
 
 
         for k in prefix_list:
-            if tok.startswith(k) & pre_flag == False:
-                tok = tok[len(k):]
-                pre_flag = True
-    return tokens
+            if tok[:len(k)] == k:
+                if pre_flag == False:
+                    tok = tok[len(k):]
+                    pre_flag = True
+        print(tok)
+        if tok != "":
+            dump.append(tok)
+    print(dump)
+    return np.array(dump)
 
 
 def stopwords(tokens):
@@ -115,9 +121,11 @@ def visualization(tokens):
     sorted_indices = np.argsort(counts)[::-1]
     ### end of help ###
     print("This will take a min")
+    for i in sorted_indices:
+        print(f"{vocab[i], counts[i]}")
 
     plt.figure(figsize=(18,10))
-    plt.bar(vocab[sorted_indices][:sizeOf], counts[sorted_indices][:sizeOf])
+    plt.bar(vocab[sorted_indices], counts[sorted_indices])
     plt.yscale("log")
     plt.xlabel("Token")
     plt.ylabel("Counts")
@@ -125,8 +133,8 @@ def visualization(tokens):
     plt.xticks(rotation = 45)
     plt.tight_layout()
     plt.show()
-
-
+story = openfile("bibleJMS.txt")
+visualization(stopwords(shortwords(stemming(lower(tokenization(story))))))
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="tokenization, preprocessing, and visualization")
