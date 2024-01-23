@@ -17,4 +17,5 @@ stopwords: removes all most common stopwords from the tokens
 visualization: creates a log py plot of the top 100 tokens, (this is because the amount of tokens is to large to handle)  
 
 # notes
-if there is an issue running the commands in python let me know 
+if there is an issue running the commands in python let me know  
+If you wanna run the program from ide uncomment line 157 - 159 and run in an environment with the nesscary libraries listed above
