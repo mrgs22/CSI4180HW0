@@ -133,8 +133,10 @@ def visualization(tokens):
     plt.xticks(rotation = 45)
     plt.tight_layout()
     plt.show()
-story = openfile("bibleJMS.txt")
-visualization(stopwords(shortwords(stemming(lower(tokenization(story))))))
+
+#this is where i run the files from
+#story = openfile("bibleJMS.txt")
+#visualization(stopwords(shortwords(stemming(lower(tokenization(story))))))
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="tokenization, preprocessing, and visualization")
